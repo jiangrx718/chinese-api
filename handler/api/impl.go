@@ -3,6 +3,7 @@ package api
 import (
 	"crm/gopkg/gins"
 	"crm/handler/api/book"
+	"crm/handler/api/picture"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,7 @@ func (h *Handler) RegisterRoutes() {
 	g := h.engine.Group("/api")
 	handlers := []gins.Handler{
 		book.NewHandler(g),
+		picture.NewHandler(g),
 	}
 
 	for _, handler := range handlers {

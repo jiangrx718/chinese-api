@@ -21,6 +21,6 @@ func NewHandler(g *gin.RouterGroup) gins.Handler {
 }
 
 func (h *Handler) RegisterRoutes() {
-	g := h.g.Group("/bool")
+	g := h.g.Group("/book")
 	g.GET("/list", h.BookList)
 }
