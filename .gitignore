@@ -1,0 +1,9 @@
+crm
+/logs/
+/tmp/
+/config/local.yml
+/.idea/
+.log
+*.env
+.DS_Store
+*.log

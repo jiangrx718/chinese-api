@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  document:
+    build: .
+    container_name: crm-service
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/app.yml:/app/config/app.yml      # 挂载配置文件 宿主机目录:容器目录
+    networks:
+      - common-app-net
+
+volumes:
+  mysql_data:
+
+networks:
+  common-app-net:
+    external: true
