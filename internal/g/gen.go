@@ -16,33 +16,44 @@ import (
 )
 
 var (
-	Q                    = new(Query)
-	CRMAdmin             *cRMAdmin
+	Q                   = new(Query)
+	SBookName           *sBookName
+	SChinesePicture     *sChinesePicture
+	SChinesePictureInfo *sChinesePictureInfo
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	CRMAdmin = &Q.CRMAdmin
+	SBookName = &Q.SBookName
+	SChinesePicture = &Q.SChinesePicture
+	SChinesePictureInfo = &Q.SChinesePictureInfo
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:                   db,
+		db:                  db,
+		SBookName:           newSBookName(db, opts...),
+		SChinesePicture:     newSChinesePicture(db, opts...),
+		SChinesePictureInfo: newSChinesePictureInfo(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	CRMAdmin             cRMAdmin
+	SBookName           sBookName
+	SChinesePicture     sChinesePicture
+	SChinesePictureInfo sChinesePictureInfo
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:                   db,
-		CRMAdmin:             q.CRMAdmin.clone(db),
+		db:                  db,
+		SBookName:           q.SBookName.clone(db),
+		SChinesePicture:     q.SChinesePicture.clone(db),
+		SChinesePictureInfo: q.SChinesePictureInfo.clone(db),
 	}
 }
 
@@ -56,18 +67,24 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:                   db,
-		CRMAdmin:             q.CRMAdmin.replaceDB(db),
+		db:                  db,
+		SBookName:           q.SBookName.replaceDB(db),
+		SChinesePicture:     q.SChinesePicture.replaceDB(db),
+		SChinesePictureInfo: q.SChinesePictureInfo.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	CRMAdmin             ICRMAdminDo
+	SBookName           ISBookNameDo
+	SChinesePicture     ISChinesePictureDo
+	SChinesePictureInfo ISChinesePictureInfoDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		CRMAdmin:             q.CRMAdmin.WithContext(ctx),
+		SBookName:           q.SBookName.WithContext(ctx),
+		SChinesePicture:     q.SChinesePicture.WithContext(ctx),
+		SChinesePictureInfo: q.SChinesePictureInfo.WithContext(ctx),
 	}
 }
 

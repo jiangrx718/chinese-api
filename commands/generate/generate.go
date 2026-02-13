@@ -2,6 +2,7 @@ package generate
 
 import (
 	"crm/gopkg/gorms"
+	"crm/internal/model"
 
 	"github.com/urfave/cli/v2"
 	"gorm.io/gen"
@@ -16,7 +17,12 @@ func Command() *cli.Command {
 				Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 			})
 			g.UseDB(gorms.Client())
-			g.ApplyBasic()
+			// Generate basic type-safe DAO API for struct following conventions
+			g.ApplyBasic(
+				model.SBookName{},
+				model.SChinesePicture{},
+				model.SChinesePictureInfo{},
+			)
 			g.Execute()
 			return nil
 		},
