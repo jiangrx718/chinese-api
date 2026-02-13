@@ -2,7 +2,7 @@ app: crm
 debug: true
 db:
   dialect: mysql
-  dsn: root:123456@tcp(mysql-service.db:3306)/crm?charset=utf8mb4&parseTime=True&loc=Local
+  dsn: root:123456@tcp(mysql-service.db:3306)/picture?charset=utf8mb4&parseTime=True&loc=Local
 redis:
   client:
     crm:

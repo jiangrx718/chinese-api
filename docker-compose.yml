@@ -3,7 +3,7 @@ version: '3.8'
 services:
   document:
     build: .
-    container_name: crm-service
+    container_name: chinese-api-service
     ports:
       - "8080:8080"
     volumes:
