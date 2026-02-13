@@ -2,7 +2,7 @@ package api
 
 import (
 	"crm/gopkg/gins"
-	"crm/handler/api/admin"
+	"crm/handler/api/book"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -28,7 +28,7 @@ func (h *Handler) RegisterRoutes() {
 	// 业务路由
 	g := h.engine.Group("/api")
 	handlers := []gins.Handler{
-		admin.NewHandler(g),
+		book.NewHandler(g),
 	}
 
 	for _, handler := range handlers {

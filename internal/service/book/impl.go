@@ -1,4 +1,4 @@
-package admin
+package book
 
 type Service struct {
 }
