@@ -4,10 +4,7 @@ db:
   client:
     default:
       dialect: mysql
-      dsn: root:123456@tcp(127.0.0.1:3306)/crm?charset=utf8mb4&parseTime=True&loc=Local
-    account:
-      dialect: mysql
-      dsn: root:123456@tcp(127.0.0.1:3306)/account?charset=utf8mb4&parseTime=True&loc=Local
+      dsn: root:123456@tcp(127.0.0.1:3306)/picture?charset=utf8mb4&parseTime=True&loc=Local
 redis:
   client:
     crm:

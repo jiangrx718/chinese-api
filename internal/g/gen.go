@@ -18,44 +18,16 @@ import (
 var (
 	Q                    = new(Query)
 	CRMAdmin             *cRMAdmin
-	CRMArticle           *cRMArticle
-	CRMArticleContent    *cRMArticleContent
-	CRMCategory          *cRMCategory
-	CRMPermission        *cRMPermission
-	CRMRole              *cRMRole
-	CRMRolePermission    *cRMRolePermission
-	SPictureBook         *sPictureBook
-	SPictureBookCategory *sPictureBookCategory
-	SPictureBookItem     *sPictureBookItem
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	CRMAdmin = &Q.CRMAdmin
-	CRMArticle = &Q.CRMArticle
-	CRMArticleContent = &Q.CRMArticleContent
-	CRMCategory = &Q.CRMCategory
-	CRMPermission = &Q.CRMPermission
-	CRMRole = &Q.CRMRole
-	CRMRolePermission = &Q.CRMRolePermission
-	SPictureBook = &Q.SPictureBook
-	SPictureBookCategory = &Q.SPictureBookCategory
-	SPictureBookItem = &Q.SPictureBookItem
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                   db,
-		CRMAdmin:             newCRMAdmin(db, opts...),
-		CRMArticle:           newCRMArticle(db, opts...),
-		CRMArticleContent:    newCRMArticleContent(db, opts...),
-		CRMCategory:          newCRMCategory(db, opts...),
-		CRMPermission:        newCRMPermission(db, opts...),
-		CRMRole:              newCRMRole(db, opts...),
-		CRMRolePermission:    newCRMRolePermission(db, opts...),
-		SPictureBook:         newSPictureBook(db, opts...),
-		SPictureBookCategory: newSPictureBookCategory(db, opts...),
-		SPictureBookItem:     newSPictureBookItem(db, opts...),
 	}
 }
 
@@ -63,15 +35,6 @@ type Query struct {
 	db *gorm.DB
 
 	CRMAdmin             cRMAdmin
-	CRMArticle           cRMArticle
-	CRMArticleContent    cRMArticleContent
-	CRMCategory          cRMCategory
-	CRMPermission        cRMPermission
-	CRMRole              cRMRole
-	CRMRolePermission    cRMRolePermission
-	SPictureBook         sPictureBook
-	SPictureBookCategory sPictureBookCategory
-	SPictureBookItem     sPictureBookItem
 }
 
 func (q *Query) Available() bool { return q.db != nil }
@@ -80,15 +43,6 @@ func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                   db,
 		CRMAdmin:             q.CRMAdmin.clone(db),
-		CRMArticle:           q.CRMArticle.clone(db),
-		CRMArticleContent:    q.CRMArticleContent.clone(db),
-		CRMCategory:          q.CRMCategory.clone(db),
-		CRMPermission:        q.CRMPermission.clone(db),
-		CRMRole:              q.CRMRole.clone(db),
-		CRMRolePermission:    q.CRMRolePermission.clone(db),
-		SPictureBook:         q.SPictureBook.clone(db),
-		SPictureBookCategory: q.SPictureBookCategory.clone(db),
-		SPictureBookItem:     q.SPictureBookItem.clone(db),
 	}
 }
 
@@ -104,43 +58,16 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                   db,
 		CRMAdmin:             q.CRMAdmin.replaceDB(db),
-		CRMArticle:           q.CRMArticle.replaceDB(db),
-		CRMArticleContent:    q.CRMArticleContent.replaceDB(db),
-		CRMCategory:          q.CRMCategory.replaceDB(db),
-		CRMPermission:        q.CRMPermission.replaceDB(db),
-		CRMRole:              q.CRMRole.replaceDB(db),
-		CRMRolePermission:    q.CRMRolePermission.replaceDB(db),
-		SPictureBook:         q.SPictureBook.replaceDB(db),
-		SPictureBookCategory: q.SPictureBookCategory.replaceDB(db),
-		SPictureBookItem:     q.SPictureBookItem.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
 	CRMAdmin             ICRMAdminDo
-	CRMArticle           ICRMArticleDo
-	CRMArticleContent    ICRMArticleContentDo
-	CRMCategory          ICRMCategoryDo
-	CRMPermission        ICRMPermissionDo
-	CRMRole              ICRMRoleDo
-	CRMRolePermission    ICRMRolePermissionDo
-	SPictureBook         ISPictureBookDo
-	SPictureBookCategory ISPictureBookCategoryDo
-	SPictureBookItem     ISPictureBookItemDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		CRMAdmin:             q.CRMAdmin.WithContext(ctx),
-		CRMArticle:           q.CRMArticle.WithContext(ctx),
-		CRMArticleContent:    q.CRMArticleContent.WithContext(ctx),
-		CRMCategory:          q.CRMCategory.WithContext(ctx),
-		CRMPermission:        q.CRMPermission.WithContext(ctx),
-		CRMRole:              q.CRMRole.WithContext(ctx),
-		CRMRolePermission:    q.CRMRolePermission.WithContext(ctx),
-		SPictureBook:         q.SPictureBook.WithContext(ctx),
-		SPictureBookCategory: q.SPictureBookCategory.WithContext(ctx),
-		SPictureBookItem:     q.SPictureBookItem.WithContext(ctx),
 	}
 }
 
