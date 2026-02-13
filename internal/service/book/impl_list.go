@@ -56,6 +56,7 @@ func ScanByPage(sType int) ([]*model.SBookName, int64, error) {
 	q := sBookName.Debug()
 	where := []gen.Condition{}
 
+	where = append(where, sBookName.Status.Eq(1))
 	where = append(where, sBookName.SType.Eq(sType))
 
 	count, err := q.Where(where...).Order(sBookName.Id.Asc()).ScanByPage(&response, 0, -1)
