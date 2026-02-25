@@ -26,5 +26,4 @@ func (h *Handler) PictureList(ctx *gin.Context) {
 	}
 
 	ctx.JSON(200, result)
-	return
 }

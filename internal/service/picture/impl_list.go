@@ -11,12 +11,9 @@ import (
 )
 
 type RespPictureService struct {
-	Id        int    `json:"id"`
-	BookId    string `json:"book_id"`
-	BookIdOld uint   `json:"book_id_old"`
-	Title     string `json:"title"`
-	Icon1     string `json:"icon_1"`
-	Icon      string `json:"icon"`
+	BookId string `json:"book_id"`
+	Title  string `json:"title"`
+	Icon   string `json:"icon"`
 }
 
 func (s *Service) PictureList(ctx context.Context, sType int, offset, limit int64) (common.ServiceResult, error) {
@@ -34,14 +31,11 @@ func (s *Service) PictureList(ctx context.Context, sType int, offset, limit int6
 	}
 
 	var listPicture []RespPictureService
-	for idx, _ := range pictureDataList {
+	for idx := range pictureDataList {
 		listPicture = append(listPicture, RespPictureService{
-			Id:        pictureDataList[idx].Id,
-			BookId:    pictureDataList[idx].BookId,
-			BookIdOld: pictureDataList[idx].BookIdOld,
-			Title:     pictureDataList[idx].Title,
-			Icon1:     pictureDataList[idx].Icon1,
-			Icon:      pictureDataList[idx].Icon,
+			BookId: pictureDataList[idx].BookId,
+			Title:  pictureDataList[idx].Title,
+			Icon:   pictureDataList[idx].Icon,
 		})
 	}
 
@@ -65,7 +59,6 @@ func ScanByPage(sType int, offset, limit int64) ([]*model.SChinesePicture, int64
 	where = append(where, sChinesePicture.Status.Eq(1), sChinesePicture.Type.Eq(sType))
 
 	// 启用状态
-
 	count, err := q.Where(where...).Order(sChinesePicture.Position.Asc()).ScanByPage(&response, int(offset), int(limit))
 	return response, count, err
 }
