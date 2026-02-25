@@ -1,13 +1,8 @@
 package server
 
 import (
-	"crm/gopkg/cache/es"
-	rxRedis "crm/gopkg/cache/redis"
-	"crm/gopkg/cron"
 	"crm/gopkg/gorms"
 	"crm/gopkg/log"
-	"crm/gopkg/minio"
-	"crm/gopkg/storage"
 	"crm/gopkg/viper"
 	"crm/internal/g"
 
@@ -31,26 +26,26 @@ func InitConfigFromConfigPath(configPath, envPath string) error {
 	if err := gorms.InitGenFromViper(g.SetDefault); err != nil {
 		return err
 	}
-	// s3对象存储
-	if err := storage.Init(); err != nil {
-		return err
-	}
-	// minio存储
-	if err := minio.Init(); err != nil {
-		return err
-	}
-	// 初始化Redis
-	if err := rxRedis.InitFromViper(); err != nil {
-		return err
-	}
-	// 初始化cron定时任务
-	if err := cron.DoCron(); err != nil {
-		return err
-	}
-	// ES配置
-	if err := es.Initialize(); err != nil {
-		return err
-	}
+	// // s3对象存储
+	// if err := storage.Init(); err != nil {
+	// 	return err
+	// }
+	// // minio存储
+	// if err := minio.Init(); err != nil {
+	// 	return err
+	// }
+	// // 初始化Redis
+	// if err := rxRedis.InitFromViper(); err != nil {
+	// 	return err
+	// }
+	// // 初始化cron定时任务
+	// if err := cron.DoCron(); err != nil {
+	// 	return err
+	// }
+	// // ES配置
+	// if err := es.Initialize(); err != nil {
+	// 	return err
+	// }
 	return nil
 }
 
