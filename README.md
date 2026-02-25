@@ -55,3 +55,23 @@ fresh
 go run main.go 
 
 ```
+
+## 5.项目部署
+```shell
+# 打镜像
+
+docker buildx build \
+  --platform linux/amd64 \
+  -t chinese-api:1.0.0-amd64 \
+  --output type=docker \
+  .
+
+# 保存镜像
+
+docker save -o /Users/jiang/jiangrx816/docker-images/chinese-api-1.0.0-amd64.tar chinese-api:1.0.0-amd64
+
+# 上传镜像：
+
+scp /Users/jiang/jiangrx816/docker-images/chinese-api-1.0.0-amd64.tar root@xxx.xxx.xxx.xxx:/data/project/chinese
+
+```
