@@ -56,7 +56,10 @@ func ScanByPage(sType int, offset, limit int64) ([]*model.SChinesePicture, int64
 	q := sChinesePicture.Debug()
 	where := []gen.Condition{}
 
-	where = append(where, sChinesePicture.Status.Eq(1), sChinesePicture.Type.Eq(sType))
+	where = append(where, sChinesePicture.Status.Eq(1))
+	if sType > 0 {
+		where = append(where, sChinesePicture.Type.Eq(sType))
+	}
 
 	// 启用状态
 	count, err := q.Where(where...).Order(sChinesePicture.Position.Asc()).ScanByPage(&response, int(offset), int(limit))
