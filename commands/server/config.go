@@ -43,7 +43,7 @@ func InitConfigFromConfigPath(configPath, envPath string) error {
 	if err := rxRedis.InitFromViper(); err != nil {
 		return err
 	}
-	//初始化cron定时任务
+	// 初始化cron定时任务
 	if err := cron.DoCron(); err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func getConfigPath(ctx *cli.Context) string {
 		return configFile
 	}
 
-	return "config/config.yml"
+	return "config/app.yml"
 }
 
 func getEnvPath(ctx *cli.Context) string {

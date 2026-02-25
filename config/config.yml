@@ -1,4 +1,4 @@
-app: crm
+app: chinese-api
 debug: true
 db:
   client:

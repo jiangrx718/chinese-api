@@ -22,9 +22,10 @@ RUN apk add --no-cache tzdata && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
-# 拷贝执行文件与配置
+# 创建 config 目录并拷贝执行文件与配置
+RUN mkdir -p /app/config
 COPY --from=builder /app/chinese-api /app/chinese-api
-COPY config/app.yml /app/config/app.yml
+COPY --from=builder /app/config/app.yml /app/config/app.yml
 
 # 端口（与配置一致可改为 8080；此处保留）
 EXPOSE 8088

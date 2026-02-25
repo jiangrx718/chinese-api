@@ -1,15 +1,17 @@
-app: crm
+app: chinese-api
 debug: true
 db:
-  dialect: mysql
-  dsn: root:123456@tcp(mysql-service.db:3306)/picture?charset=utf8mb4&parseTime=True&loc=Local
+  client:
+    default:
+      dialect: mysql
+      dsn: root:123456@tcp(mysql-service.db:12306)/picture?charset=utf8mb4&parseTime=True&loc=Local
 redis:
   client:
     crm:
       addr:
-        - redis-service.db:6379
+        - 127.0.0.1:6379
       db: 0
-      password: 123456
+      password:
       type: single-node
   default: default
 cron:
