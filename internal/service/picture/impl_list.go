@@ -59,6 +59,8 @@ func ScanByPage(sType int, offset, limit int64) ([]*model.SChinesePicture, int64
 	where = append(where, sChinesePicture.Status.Eq(1))
 	if sType > 0 {
 		where = append(where, sChinesePicture.Type.Eq(sType))
+	} else {
+		where = append(where, sChinesePicture.Type.Gt(0))
 	}
 
 	// 启用状态
