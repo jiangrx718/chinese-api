@@ -72,6 +72,6 @@ docker save -o /Users/jiang/jiangrx816/docker-images/chinese-api-1.0.0-amd64.tar
 
 # 上传镜像：
 
-scp /Users/jiang/jiangrx816/docker-images/chinese-api-1.0.0-amd64.tar root@xxx.xxx.xxx.xxx:/data/project/chinese
+scp /Users/jiang/jiangrx816/docker-images/chinese-api-1.0.0-amd64.tar root@182.92.84.106:/data/project/chinese
 
 ```
