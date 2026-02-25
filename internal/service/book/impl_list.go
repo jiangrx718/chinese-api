@@ -11,7 +11,6 @@ import (
 )
 
 type RespBookService struct {
-	Id         int    `json:"id"`
 	CategoryId int    `json:"category_id"`
 	Name       string `json:"name"`
 }
@@ -31,9 +30,8 @@ func (s *Service) BookList(ctx context.Context, sType int) (common.ServiceResult
 	}
 
 	var listBook []RespBookService
-	for idx, _ := range bookDataList {
+	for idx := range bookDataList {
 		listBook = append(listBook, RespBookService{
-			Id:         bookDataList[idx].Id,
 			CategoryId: bookDataList[idx].CategoryId,
 			Name:       bookDataList[idx].Name,
 		})

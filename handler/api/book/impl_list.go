@@ -25,5 +25,4 @@ func (h *Handler) BookList(ctx *gin.Context) {
 	}
 
 	ctx.JSON(200, result)
-	return
 }
