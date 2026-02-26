@@ -35,7 +35,7 @@ func (s *Service) InfoList(ctx context.Context, bookId string) (common.ServiceRe
 		listInfo = append(listInfo, RespInfoService{
 			Pic:      infoDataList[idx].Pic,
 			Position: infoDataList[idx].Position,
-			Mp3:      infoDataList[idx].Mp3,
+			Mp3:      infoDataList[idx].Audio,
 		})
 	}
 
@@ -47,18 +47,18 @@ func (s *Service) InfoList(ctx context.Context, bookId string) (common.ServiceRe
 	return result, nil
 }
 
-func ScanByPage(bookId string) ([]*model.SChinesePictureInfo, int64, error) {
+func ScanByPage(bookId string) ([]*model.SPictureBookItem, int64, error) {
 	var (
-		sChinesePictureInfo = g.SChinesePictureInfo
-		response            = make([]*model.SChinesePictureInfo, 0)
+		sPictureBookItem = g.SPictureBookItem
+		response         = make([]*model.SPictureBookItem, 0)
 	)
 
-	q := sChinesePictureInfo.Debug()
+	q := sPictureBookItem.Debug()
 	where := []gen.Condition{}
 
-	where = append(where, sChinesePictureInfo.Status.Eq(1))
-	where = append(where, sChinesePictureInfo.BookId.Eq(bookId))
+	where = append(where, sPictureBookItem.Status.Eq("on"))
+	where = append(where, sPictureBookItem.BookId.Eq(bookId))
 
-	count, err := q.Where(where...).Order(sChinesePictureInfo.Position.Asc()).ScanByPage(&response, 0, -1)
+	count, err := q.Where(where...).Order(sPictureBookItem.Position.Asc()).ScanByPage(&response, 0, -1)
 	return response, count, err
 }

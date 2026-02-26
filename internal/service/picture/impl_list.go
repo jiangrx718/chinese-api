@@ -16,13 +16,13 @@ type RespPictureService struct {
 	Icon   string `json:"icon"`
 }
 
-func (s *Service) PictureList(ctx context.Context, sType int, offset, limit int64) (common.ServiceResult, error) {
+func (s *Service) PictureList(ctx context.Context, categoryId string, offset, limit int64) (common.ServiceResult, error) {
 	var (
 		logObj = log.SugarContext(ctx)
 		result = common.NewCRMServiceResult()
 	)
 
-	pictureDataList, count, err := ScanByPage(sType, offset, limit)
+	pictureDataList, count, err := ScanByPage(categoryId, offset, limit)
 	if err != nil {
 		logObj.Errorw("AdminList Find", "error", err)
 		result.SetError(&common.ServiceError{Code: -1, Message: "failed"})
@@ -47,23 +47,21 @@ func (s *Service) PictureList(ctx context.Context, sType int, offset, limit int6
 	return result, nil
 }
 
-func ScanByPage(sType int, offset, limit int64) ([]*model.SChinesePicture, int64, error) {
+func ScanByPage(categoryId string, offset, limit int64) ([]*model.SPictureBook, int64, error) {
 	var (
-		sChinesePicture = g.SChinesePicture
-		response        = make([]*model.SChinesePicture, 0)
+		sPictureBook = g.SPictureBook
+		response     = make([]*model.SPictureBook, 0)
 	)
 
-	q := sChinesePicture.Debug()
+	q := sPictureBook.Debug()
 	where := []gen.Condition{}
 
-	where = append(where, sChinesePicture.Status.Eq(1))
-	if sType > 0 {
-		where = append(where, sChinesePicture.Type.Eq(sType))
-	} else {
-		where = append(where, sChinesePicture.Type.Gt(0))
+	where = append(where, sPictureBook.Status.Eq("on"))
+	if categoryId != "" {
+		where = append(where, sPictureBook.CategoryId.Eq(categoryId))
 	}
 
 	// 启用状态
-	count, err := q.Where(where...).Order(sChinesePicture.Position.Asc()).ScanByPage(&response, int(offset), int(limit))
+	count, err := q.Where(where...).Order(sPictureBook.Position.Desc()).ScanByPage(&response, int(offset), int(limit))
 	return response, count, err
 }

@@ -19,9 +19,9 @@ func Command() *cli.Command {
 			g.UseDB(gorms.Client())
 			// Generate basic type-safe DAO API for struct following conventions
 			g.ApplyBasic(
-				model.SBookName{},
-				model.SChinesePicture{},
-				model.SChinesePictureInfo{},
+				model.SPictureBook{},
+				model.SPictureBookItem{},
+				model.SPictureCategory{},
 			)
 			g.Execute()
 			return nil

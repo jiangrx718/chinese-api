@@ -1,26 +1,26 @@
-package book
+package category
 
 import (
 	"crm/gopkg/gins"
 	"crm/internal/service"
-	"crm/internal/service/book"
+	"crm/internal/service/category"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-	g           *gin.RouterGroup
-	bookService service.BookIFace
+	g               *gin.RouterGroup
+	categoryService service.CategoryIFace
 }
 
 func NewHandler(g *gin.RouterGroup) gins.Handler {
 	return &Handler{
-		g:           g,
-		bookService: book.NewService(),
+		g:               g,
+		categoryService: category.NewService(),
 	}
 }
 
 func (h *Handler) RegisterRoutes() {
 	g := h.g.Group("/book")
-	g.GET("/list", h.BookList)
+	g.GET("/category", h.CategoryList)
 }

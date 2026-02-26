@@ -1,4 +1,4 @@
-package book
+package category
 
 type Service struct {
 }

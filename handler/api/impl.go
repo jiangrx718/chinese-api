@@ -2,7 +2,7 @@ package api
 
 import (
 	"crm/gopkg/gins"
-	"crm/handler/api/book"
+	"crm/handler/api/category"
 	"crm/handler/api/info"
 	"crm/handler/api/picture"
 
@@ -30,7 +30,7 @@ func (h *Handler) RegisterRoutes() {
 	// 业务路由
 	g := h.engine.Group("/api")
 	handlers := []gins.Handler{
-		book.NewHandler(g),
+		category.NewHandler(g),
 		picture.NewHandler(g),
 		info.NewHandler(g),
 	}

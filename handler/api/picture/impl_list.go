@@ -8,7 +8,7 @@ import (
 
 // PictureListQuery 列表参数
 type PictureListQuery struct {
-	Type int `json:"type" form:"type"`
+	CategoryId string `json:"category_id" form:"category_id"`
 	httputil.Pagination
 }
 
@@ -19,7 +19,7 @@ func (h *Handler) PictureList(ctx *gin.Context) {
 		return
 	}
 
-	result, err := h.pictureService.PictureList(ctx, query.Type, query.Offset, query.Limit)
+	result, err := h.pictureService.PictureList(ctx, query.CategoryId, query.Offset, query.Limit)
 	if err != nil {
 		httputil.ServerError(ctx, err)
 		return

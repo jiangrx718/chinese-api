@@ -6,5 +6,5 @@ import (
 )
 
 type PictureIFace interface {
-	PictureList(ctx context.Context, sType int, offset, limit int64) (common.ServiceResult, error)
+	PictureList(ctx context.Context, categoryId string, offset, limit int64) (common.ServiceResult, error)
 }

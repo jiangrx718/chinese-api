@@ -16,44 +16,44 @@ import (
 )
 
 var (
-	Q                   = new(Query)
-	SBookName           *sBookName
-	SChinesePicture     *sChinesePicture
-	SChinesePictureInfo *sChinesePictureInfo
+	Q                = new(Query)
+	SPictureBook     *sPictureBook
+	SPictureBookItem *sPictureBookItem
+	SPictureCategory *sPictureCategory
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	SBookName = &Q.SBookName
-	SChinesePicture = &Q.SChinesePicture
-	SChinesePictureInfo = &Q.SChinesePictureInfo
+	SPictureBook = &Q.SPictureBook
+	SPictureBookItem = &Q.SPictureBookItem
+	SPictureCategory = &Q.SPictureCategory
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:                  db,
-		SBookName:           newSBookName(db, opts...),
-		SChinesePicture:     newSChinesePicture(db, opts...),
-		SChinesePictureInfo: newSChinesePictureInfo(db, opts...),
+		db:               db,
+		SPictureBook:     newSPictureBook(db, opts...),
+		SPictureBookItem: newSPictureBookItem(db, opts...),
+		SPictureCategory: newSPictureCategory(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	SBookName           sBookName
-	SChinesePicture     sChinesePicture
-	SChinesePictureInfo sChinesePictureInfo
+	SPictureBook     sPictureBook
+	SPictureBookItem sPictureBookItem
+	SPictureCategory sPictureCategory
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:                  db,
-		SBookName:           q.SBookName.clone(db),
-		SChinesePicture:     q.SChinesePicture.clone(db),
-		SChinesePictureInfo: q.SChinesePictureInfo.clone(db),
+		db:               db,
+		SPictureBook:     q.SPictureBook.clone(db),
+		SPictureBookItem: q.SPictureBookItem.clone(db),
+		SPictureCategory: q.SPictureCategory.clone(db),
 	}
 }
 
@@ -67,24 +67,24 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:                  db,
-		SBookName:           q.SBookName.replaceDB(db),
-		SChinesePicture:     q.SChinesePicture.replaceDB(db),
-		SChinesePictureInfo: q.SChinesePictureInfo.replaceDB(db),
+		db:               db,
+		SPictureBook:     q.SPictureBook.replaceDB(db),
+		SPictureBookItem: q.SPictureBookItem.replaceDB(db),
+		SPictureCategory: q.SPictureCategory.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	SBookName           ISBookNameDo
-	SChinesePicture     ISChinesePictureDo
-	SChinesePictureInfo ISChinesePictureInfoDo
+	SPictureBook     ISPictureBookDo
+	SPictureBookItem ISPictureBookItemDo
+	SPictureCategory ISPictureCategoryDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		SBookName:           q.SBookName.WithContext(ctx),
-		SChinesePicture:     q.SChinesePicture.WithContext(ctx),
-		SChinesePictureInfo: q.SChinesePictureInfo.WithContext(ctx),
+		SPictureBook:     q.SPictureBook.WithContext(ctx),
+		SPictureBookItem: q.SPictureBookItem.WithContext(ctx),
+		SPictureCategory: q.SPictureCategory.WithContext(ctx),
 	}
 }
 
