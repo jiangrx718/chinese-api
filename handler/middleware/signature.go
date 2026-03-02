@@ -25,6 +25,12 @@ var nonceStore = &signState{data: map[string]int64{}}
 
 func Signature() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		auth := c.GetHeader("X-Auth")
+		if auth == "no" {
+			c.Next()
+			return
+		}
+
 		secret := viper.GetString("auth.sign.secret")
 		if secret == "" {
 			httputil.Forbidden(c)

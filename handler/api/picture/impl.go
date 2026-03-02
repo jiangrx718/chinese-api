@@ -2,6 +2,7 @@ package picture
 
 import (
 	"crm/gopkg/gins"
+	"crm/handler/middleware"
 	"crm/internal/service"
 	"crm/internal/service/picture"
 
@@ -22,5 +23,5 @@ func NewHandler(g *gin.RouterGroup) gins.Handler {
 
 func (h *Handler) RegisterRoutes() {
 	g := h.g.Group("/picture")
-	g.GET("/list", h.PictureList)
+	g.GET("/list", middleware.Signature(), h.PictureList)
 }

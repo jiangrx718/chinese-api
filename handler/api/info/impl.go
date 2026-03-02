@@ -2,6 +2,7 @@ package info
 
 import (
 	"crm/gopkg/gins"
+	"crm/handler/middleware"
 	"crm/internal/service"
 	"crm/internal/service/info"
 
@@ -22,5 +23,5 @@ func NewHandler(g *gin.RouterGroup) gins.Handler {
 
 func (h *Handler) RegisterRoutes() {
 	g := h.g.Group("/info")
-	g.GET("/list", h.InfoList)
+	g.GET("/list", middleware.Signature(), h.InfoList)
 }
