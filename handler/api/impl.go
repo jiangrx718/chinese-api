@@ -24,7 +24,10 @@ func (h *Handler) RegisterRoutes() {
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
 	config.AllowMethods = []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"}
-	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization"}
+	config.AllowHeaders = []string{
+		"Origin", "Content-Length", "Content-Type", "Authorization",
+		"X-Timestamp", "X-Nonce", "X-Signature", "X-Sign-Method", "X-App-Id",
+	}
 	h.engine.Use(cors.New(config))
 
 	// 业务路由

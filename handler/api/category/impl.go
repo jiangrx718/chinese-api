@@ -2,6 +2,7 @@ package category
 
 import (
 	"crm/gopkg/gins"
+	"crm/handler/middleware"
 	"crm/internal/service"
 	"crm/internal/service/category"
 
@@ -22,5 +23,5 @@ func NewHandler(g *gin.RouterGroup) gins.Handler {
 
 func (h *Handler) RegisterRoutes() {
 	g := h.g.Group("/book")
-	g.GET("/category", h.CategoryList)
+	g.GET("/category", middleware.Signature(), h.CategoryList)
 }

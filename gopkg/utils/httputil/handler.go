@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"crm/gopkg/utils"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,7 +41,7 @@ func UnAuthorized(ctx *gin.Context) {
 func Forbidden(ctx *gin.Context) {
 	ctx.AbortWithStatusJSON(403, HttpError{
 		Code: 403,
-		Msg:  "需要登录",
+		Msg:  "无权访问",
 	})
 }
 

@@ -25,6 +25,11 @@ auth:
   jwt:
     expire_hour: 720
     secret: jiang_ruoxi
+  sign:
+    enable: true
+    secret: jiang_ruoxi
+    skew_seconds: 60
+    nonce_ttl_seconds: 60
 elasticsearch:
   engine:
     demo_indices: rx.demo.alias
